@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ink Check Lite | Self Care for Livers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <span class="logo-ink">Ink</span><span class="logo-dot">.</span><span class="logo-check">Check</span>
+      <span class="badge">Lite</span>
+    </div>
+    <div class="header-tagline">Self Care for Livers</div>
+  </div>
+  <div class="tab-nav">
+    <button class="tab-btn active" data-tab="form">アンケート</button>
+    <button class="tab-btn" data-tab="stats">集計</button>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- ── アンケート画面 ── -->
+  <div id="view-form" class="view active">
+
+    <div class="form-header">
+      <p class="form-date" id="form-date"></p>
+      <h1 class="form-title">ストレスチェック</h1>
+      <p class="form-desc">今の状態を正直に教えてください。<br>データはこのアプリ内にのみ保存されます。</p>
+    </div>
+
+    <form id="check-form" novalidate>
+
+      <!-- ライバー名 -->
+      <section class="card">
+        <label class="field-label required">あなたの名前</label>
+        <input type="text" id="liver_name" class="text-input" placeholder="ライバー名を入力" autocomplete="off" required />
+      </section>
+
+      <!-- Ink Inc. 動線 ① -->
+      <a href="https://inkinc-hp.vercel.app/" target="_blank" class="ink-banner">
+        <div class="ink-banner-inner">
+          <div class="ink-banner-logo">🖤 Ink Inc.</div>
+          <div class="ink-banner-text">
+            <div class="ink-banner-main">このツールはInk Inc.が制作しました</div>
+            <div class="ink-banner-sub">所属ライバー募集中 → 公式サイトへ</div>
+          </div>
+          <div class="ink-banner-arrow">→</div>
+        </div>
+      </a>
+
+      <!-- スコア -->
+      <section class="card">
+        <div class="section-heading">
+          <span class="section-icon">◆</span>
+          <span>現在の状態（1:良好 〜 5:非常につらい）</span>
+        </div>
+        <div class="score-grid" id="score-grid">
+
+          <div class="score-item" data-field="score_private">
+            <div class="score-label">プライベート</div>
+            <div class="score-buttons">
+              <button type="button" class="score-btn" data-value="1">1</button>
+              <button type="button" class="score-btn" data-value="2">2</button>
+              <button type="button" class="score-btn" data-value="3">3</button>
+              <button type="button" class="score-btn" data-value="4">4</button>
+              <button type="button" class="score-btn" data-value="5">5</button>
+            </div>
+            <div class="score-hint"><span>良好</span><span>非常につらい</span></div>
+          </div>
+
+          <div class="score-item" data-field="score_rest">
+            <div class="score-label">休息</div>
+            <div class="score-buttons">
+              <button type="button" class="score-btn" data-value="1">1</button>
+              <button type="button" class="score-btn" data-value="2">2</button>
+              <button type="button" class="score-btn" data-value="3">3</button>
+              <button type="button" class="score-btn" data-value="4">4</button>
+              <button type="button" class="score-btn" data-value="5">5</button>
+            </div>
+            <div class="score-hint"><span>良好</span><span>非常につらい</span></div>
+          </div>
+
+          <div class="score-item" data-field="score_rhythm">
+            <div class="score-label">生活リズムの乱れ</div>
+            <div class="score-buttons">
+              <button type="button" class="score-btn" data-value="1">1</button>
+              <button type="button" class="score-btn" data-value="2">2</button>
+              <button type="button" class="score-btn" data-value="3">3</button>
+              <button type="button" class="score-btn" data-value="4">4</button>
+              <button type="button" class="score-btn" data-value="5">5</button>
+            </div>
+            <div class="score-hint"><span>良好</span><span>非常につらい</span></div>
+          </div>
+
+          <div class="score-item" data-field="score_mental">
+            <div class="score-label">精神的な落ち込み</div>
+            <div class="score-buttons">
+              <button type="button" class="score-btn" data-value="1">1</button>
+              <button type="button" class="score-btn" data-value="2">2</button>
+              <button type="button" class="score-btn" data-value="3">3</button>
+              <button type="button" class="score-btn" data-value="4">4</button>
+              <button type="button" class="score-btn" data-value="5">5</button>
+            </div>
+            <div class="score-hint"><span>良好</span><span>非常につらい</span></div>
+          </div>
+
+          <div class="score-item" data-field="score_fan">
+            <div class="score-label">配信やファン対応</div>
+            <div class="score-buttons">
+              <button type="button" class="score-btn" data-value="1">1</button>
+              <button type="button" class="score-btn" data-value="2">2</button>
+              <button type="button" class="score-btn" data-value="3">3</button>
+              <button type="button" class="score-btn" data-value="4">4</button>
+              <button type="button" class="score-btn" data-value="5">5</button>
+            </div>
+            <div class="score-hint"><span>良好</span><span>非常につらい</span></div>
+          </div>
+
+          <div class="score-item" data-field="score_stream">
+            <div class="score-label">配信準備・配信内容</div>
+            <div class="score-buttons">
+              <button type="button" class="score-btn" data-value="1">1</button>
+              <button type="button" class="score-btn" data-value="2">2</button>
+              <button type="button" class="score-btn" data-value="3">3</button>
+              <button type="button" class="score-btn" data-value="4">4</button>
+              <button type="button" class="score-btn" data-value="5">5</button>
+            </div>
+            <div class="score-hint"><span>良好</span><span>非常につらい</span></div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- メモ -->
+      <section class="card">
+        <div class="section-heading">
+          <span class="section-icon">◆</span>
+          <span>メモ（任意）</span>
+        </div>
+        <div class="field-group">
+          <label class="field-label">気になること・今日の状態など</label>
+          <textarea id="memo" class="textarea" placeholder="自由に書いてください" rows="4"></textarea>
+        </div>
+      </section>
+
+      <div id="error-msg" class="error-msg" hidden></div>
+
+      <button type="submit" id="submit-btn" class="submit-btn">
+        <span id="submit-label">回答を送信する</span>
+        <span id="submit-spinner" class="spinner" hidden></span>
+      </button>
+
+      <p class="privacy-note">回答データはこのアプリ内にのみ保存されます。外部には送信されません。</p>
+
+    </form>
+
+    <!-- 送信完了メッセージ -->
+    <div id="submit-result" class="submit-result" hidden>
+      <div class="result-icon">🖤</div>
+      <div class="result-title">回答ありがとうございました</div>
+      <div class="result-msg" id="result-msg"></div>
+      <button id="result-close-btn" class="btn-secondary">続けて記録する</button>
+    </div>
+
+  </div>
+
+  <!-- ── 集計画面 ── -->
+  <div id="view-stats" class="view">
+
+    <div class="stats-header">
+      <h2 class="stats-title">スコア推移</h2>
+      <div class="stats-search">
+        <input type="text" id="stats-name" class="text-input" placeholder="名前を入力して検索" />
+        <button id="stats-search-btn" class="btn-primary">表示</button>
+      </div>
+    </div>
+
+    <div id="stats-empty" class="empty-msg">名前を入力してスコア推移を確認できます</div>
+
+    <div id="stats-content" style="display:none">
+      <div class="card">
+        <canvas id="stats-chart"></canvas>
+      </div>
+
+      <div class="card">
+        <div class="section-heading">
+          <span class="section-icon">◆</span>
+          <span>回答履歴</span>
+        </div>
+        <div id="history-list" class="history-list"></div>
+      </div>
+    </div>
+
+    <!-- Ink Inc. 動線 ② -->
+    <a href="https://inkinc-hp.vercel.app/" target="_blank" class="ink-banner ink-banner-stats">
+      <div class="ink-banner-inner">
+        <div class="ink-banner-logo">🖤 Ink Inc.</div>
+        <div class="ink-banner-text">
+          <div class="ink-banner-main">もっと詳しい分析・サポートが必要ですか？</div>
+          <div class="ink-banner-sub">Ink Inc.への所属でAI所見・所長サポートが受けられます → 公式サイトへ</div>
+        </div>
+        <div class="ink-banner-arrow">→</div>
+      </div>
+    </a>
+
+  </div>
+
+</main>
+
+<footer class="footer">
+  <span>Ink Check Lite — Made by <a href="https://inkinc-hp.vercel.app/" target="_blank">Ink Inc.</a></span>
+  <span class="footer-license">CC BY-NC 4.0</span>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
